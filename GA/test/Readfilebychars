@@ -1,0 +1,31 @@
+public static void readFileByChars(String fileName) {  
+        File file = new File(fileName);  
+        Reader reader = null;  
+        char[] tempchars = new char[100000]; 
+        try { 
+            int charread = 0;
+            reader = new InputStreamReader(new FileInputStream(fileName));  
+            while((charread = reader.read(tempchars)) != -1)
+            {  
+                if((charread == tempchars.length) && (tempchars[tempchars.length -1 ] != '\r')){
+                    System.out.print(tempchars);
+                }else{
+                    for (int i = 0; i < charread; i++){
+                        if (tempchars[i] == '\r'){
+                            continue;
+                        }else{
+                            System.out.print(tempchars[i]);
+                        }
+                    }
+                }
+            }
+        }catch (Exception e1) {  
+            e1.printStackTrace();  
+        } finally {  
+            if (reader != null) {  
+                try {  
+                    reader.close();  
+                } catch (IOException e1) {  } 
+            }
+        }  
+    }        
